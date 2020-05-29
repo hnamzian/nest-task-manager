@@ -1,4 +1,4 @@
-import { Injectable, ParseUUIDPipe } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Task, TaskStatus } from './task.model';
 import { v1 as uuid } from 'uuid'
 
