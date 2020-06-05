@@ -17,4 +17,11 @@ export class TaskRepository extends Repository<Task> {
 
     return task
   }
+
+  async updateTaskStatus(id: string, status: TaskStatus): Promise<Task> {
+    const task = await this.findOne(id)
+    task.status = status
+    await task.save()
+    return task
+  }
 }

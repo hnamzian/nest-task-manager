@@ -4,6 +4,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 import { Task } from './task.entity';
+import { TaskStatus } from './task-status.enum';
 
 @Controller('tasks')
 export class TasksController {
@@ -32,13 +33,14 @@ export class TasksController {
     return task
   }
 
-  // @Patch(':id/status')
-  // updatedTask(
-  //   @Param('id') id: string, 
-  //   @Body('status', TaskStatusValidationPipe) taskStatus: TaskStatus
-  // ): Task {
-  //   return this.tasksService.updateTaskStatus(id, taskStatus)
-  // }
+  @Patch(':id/status')
+  updatedTask(
+    @Param('id') id: string, 
+    @Body('status', TaskStatusValidationPipe) taskStatus: TaskStatus
+  ): Promise<Task> {
+    const task = this.tasksService.updateTaskStatus(id, taskStatus)
+    return task
+  }
 
   @Delete('/:id')
   async deleteTaskById(@Param('id') id: string): Promise<void> {
