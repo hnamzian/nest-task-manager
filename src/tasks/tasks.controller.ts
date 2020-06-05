@@ -25,12 +25,12 @@ export class TasksController {
     return found
   }
 
-  // @Post()
-  // @UsePipes(ValidationPipe)
-  // async createTask(@Body() createTaskDto: CreateTaskDto) {
-  //   const task = await this.tasksService.createTask(createTaskDto)
-  //   return task
-  // }
+  @Post()
+  @UsePipes(ValidationPipe)
+  async createTask(@Body() createTaskDto: CreateTaskDto) {
+    const task = await this.tasksService.createTask(createTaskDto)
+    return task
+  }
 
   // @Patch(':id/status')
   // updatedTask(
