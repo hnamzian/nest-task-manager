@@ -1,0 +1,10 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "database": "taskmanager",
+  "username": "postgres",
+  "password": "docker",
+  "entities": ["./dist/**/*.entity.js"],
+  "synchronize": true
+}
