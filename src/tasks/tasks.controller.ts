@@ -15,8 +15,10 @@ export class TasksController {
   constructor(private tasksService: TasksService) { }
 
   @Get()
-  async getTasks(@Query(ValidationPipe) filterDto: GetTasksFilterDto): Promise<Task[]> {
-    const tasks = await this.tasksService.getTasksByFilter(filterDto)
+  async getTasks(
+    @Query(ValidationPipe) filterDto: GetTasksFilterDto,
+    @GetUser() user: User): Promise<Task[]> {
+    const tasks = await this.tasksService.getTasksByFilter(filterDto, user)
     return tasks
   }
 
