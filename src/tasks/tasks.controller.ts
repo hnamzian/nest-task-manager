@@ -46,9 +46,10 @@ export class TasksController {
   @Patch(':id/status')
   updatedTask(
     @Param('id') id: string, 
-    @Body('status', TaskStatusValidationPipe) taskStatus: TaskStatus
+    @Body('status', TaskStatusValidationPipe) taskStatus: TaskStatus,
+    @GetUser() user: User
   ): Promise<Task> {
-    const task = this.tasksService.updateTaskStatus(id, taskStatus)
+    const task = this.tasksService.updateTaskStatus(id, taskStatus, user)
     return task
   }
 
