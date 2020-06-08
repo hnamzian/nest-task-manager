@@ -10,7 +10,7 @@ import { User } from 'src/auth/user.entity';
 export class TasksService {
   constructor(
     private taskRepository: TaskRepository
-  ) {}
+  ) { }
 
   async getAllTasks(): Promise<Task[]> {
     const tasks = await this.taskRepository.find()
@@ -22,10 +22,10 @@ export class TasksService {
     return tasks
   }
 
-  getTaskById(id: string): Promise<Task> {
-    const found = this.taskRepository.findOne(id)
+  async getTaskById(id: string, user: User): Promise<Task> {
+    const found = await this.taskRepository.findOne({ id, userId: user.id })
 
-    if (!found) 
+    if (!found)
       throw new NotFoundException(`Task with id ${id} not found`)
 
     return found
@@ -43,7 +43,7 @@ export class TasksService {
 
   async deleteTaskById(id: string): Promise<void> {
     const result = await this.taskRepository.delete(id)
-    
+
     if (result.affected === 0)
       throw new NotFoundException(`Task with id ${id} not found`)
   }

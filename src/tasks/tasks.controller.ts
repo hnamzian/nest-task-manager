@@ -23,8 +23,10 @@ export class TasksController {
   }
 
   @Get('/:id')
-  async getTaskById(@Param('id') id: string): Promise<Task> {
-    const found = await this.tasksService.getTaskById(id)
+  async getTaskById(
+    @Param('id') id: string,
+    @GetUser() user: User): Promise<Task> {
+    const found = await this.tasksService.getTaskById(id, user)
 
     if (!found)
       throw new NotFoundException(`Task with id ${id} not found`)
